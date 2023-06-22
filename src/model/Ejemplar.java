@@ -6,15 +6,21 @@ public abstract class Ejemplar {
     private Long id;
     private String titulo;
     private String autor;
-    private LocalDate fechaPublicacion;
+    private int anioPublicacion;
     //categoria?
-    private boolean disponible;
+    // Si creo q si, seria un atributo del la clase hijo
 
-    public Ejemplar(Long id, String titulo, String autor, LocalDate fechaPublicacion) {
+
+    private boolean disponible;
+    public Ejemplar(){
+
+    }
+
+    public Ejemplar(Long id, String titulo, String autor, int anioPublicacion) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
-        this.fechaPublicacion = fechaPublicacion;
+        this.anioPublicacion = anioPublicacion;
         this.disponible = true;
     }
 
@@ -42,15 +48,16 @@ public abstract class Ejemplar {
         this.autor = autor;
     }
 
-    public LocalDate getFechaPublicacion() {
-        return fechaPublicacion;
+    public int getAnioPublicacion() {
+        return anioPublicacion;
     }
 
-    public void setFechaPublicacion(LocalDate fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
+
+    public void setAnioPublicacion(int anioPublicacion) {
+        this.anioPublicacion = anioPublicacion;
     }
 
-    public boolean isDisponible() {
+    public boolean getDisponible() {
         return disponible;
     }
 

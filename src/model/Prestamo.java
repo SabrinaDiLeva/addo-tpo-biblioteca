@@ -6,7 +6,7 @@ public class Prestamo {
     private Long id;
     private LocalDate fechaInicio;
     private int duracion;
-    private int fechaDevolucion;
+    private LocalDate fechaDevolucion;
     private String estado; //modificar por un enum
     private Socio socio;
     private Ejemplar ejemplar;
@@ -44,11 +44,11 @@ public class Prestamo {
         this.duracion = duracion;
     }
 
-    public int getFechaDevolucion() {
+    public LocalDate getFechaDevolucion() {
         return fechaDevolucion;
     }
 
-    public void setFechaDevolucion(int fechaDevolucion) {
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
 
@@ -75,4 +75,6 @@ public class Prestamo {
     public void setEjemplar(Ejemplar ejemplar) {
         this.ejemplar = ejemplar;
     }
+
+    public String getTituloEjemplar(){ return  this.ejemplar.getTitulo(); }
 }
