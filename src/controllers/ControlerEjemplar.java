@@ -7,10 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControlerEjemplar {
+    private ControlerEjemplar instancia;
     private List<Ejemplar> listaEjemplares;
 
-    public ControlerEjemplar(){}
+    private ControlerEjemplar(){}
 
+    public ControlerEjemplar getInstacia(){
+        if (instancia == null)
+            instancia = new ControlerEjemplar();
+        return this.instancia;
+    }
     public void cargarEjemplares(Ejemplar ejemplar){
         listaEjemplares.add(ejemplar);
     }

@@ -5,9 +5,16 @@ import model.Prestamo;
 import java.util.List;
 
 public class ControlerPrestamo {
+    private ControlerPrestamo instancia; // TODO a veces se le pone static pero nose el fundamento
     private List<Prestamo> listaPrestamos;
 
-    public ControlerPrestamo(){}
+    private ControlerPrestamo(){}
+
+    public ControlerPrestamo getInstancia(){
+        if(instancia == null)
+            instancia = new ControlerPrestamo();
+        return instancia;
+    }
 
     public void crearPrestamo(Prestamo prestamo){
         listaPrestamos.add(prestamo);

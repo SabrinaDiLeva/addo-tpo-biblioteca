@@ -6,9 +6,16 @@ import model.Socio;
 import java.util.List;
 
 public class ControlerSocios {
+    private ControlerSocios instancia;
     private List<Socio> listaSocios;
 
-    public ControlerSocios(){ }
+    private ControlerSocios(){ }
+
+    public ControlerSocios getInstancia() {
+        if(instancia == null)
+            instancia = new ControlerSocios();
+        return instancia;
+    }
 
     public void crearSocio(Socio socio){
         listaSocios.add(socio);
