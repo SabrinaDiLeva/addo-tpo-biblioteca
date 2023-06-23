@@ -1,5 +1,7 @@
 package model;
 
+import statePrestamo.EstadoPrestamo;
+
 import java.time.LocalDate;
 
 public class Prestamo {
@@ -7,11 +9,11 @@ public class Prestamo {
     private LocalDate fechaInicio;
     private int duracion;
     private LocalDate fechaDevolucion;
-    private String estado; //modificar por un enum
+    private EstadoPrestamo estado;
     private Socio socio;
     private Ejemplar ejemplar;
 
-    public Prestamo(Long id, LocalDate fechaInicio, int duracion, String estado, Socio socio, Ejemplar ejemplar) {
+    public Prestamo(Long id, LocalDate fechaInicio, int duracion, EstadoPrestamo estado, Socio socio, Ejemplar ejemplar) {
         this.id = id;
         this.fechaInicio = fechaInicio;
         this.duracion = duracion;
@@ -52,11 +54,11 @@ public class Prestamo {
         this.fechaDevolucion = fechaDevolucion;
     }
 
-    public String getEstado() {
+    public EstadoPrestamo getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoPrestamo estado) {
         this.estado = estado;
     }
 

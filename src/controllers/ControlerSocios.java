@@ -1,5 +1,6 @@
 package controllers;
 
+import model.Conducta;
 import model.Prestamo;
 import model.Socio;
 
@@ -16,12 +17,12 @@ public class ControlerSocios {
             instancia = new ControlerSocios();
         return instancia;
     }
-
+    //CRUD SOCIOS
     public void crearSocio(Socio socio){
         listaSocios.add(socio);
     }
     public void borrarSocio(int dni){
-        Socio aux = busarSocio(dni);
+        Socio aux = buscarSocio(dni);
         listaSocios.remove(aux);
     }
     public void actualizarSocio(Socio socio){
@@ -46,7 +47,7 @@ public class ControlerSocios {
         return -1;
     }
 
-    public Socio busarSocio(int dni){
+    public Socio buscarSocio(int dni){
         for(Socio persona: listaSocios){
             if(persona.getDni() == dni){
                 return persona;
@@ -67,7 +68,7 @@ public class ControlerSocios {
     }
 
     public void verHistorialSocio(int dni){
-        Socio aux = busarSocio(dni);
+        Socio aux = buscarSocio(dni);
 
         List<Prestamo> listaDePrestamos = aux.getPrestamos();
         System.out.println("Historial de el socio: "+ aux.getNombre());
@@ -80,5 +81,39 @@ public class ControlerSocios {
             System.out.print("Estado: "+ prestamo.getEstado());
 
         }
+    }
+
+
+    //CRUD CONDUCTA
+    public void crearConducta(Conducta conducta, int dniSocio){
+        Socio socio = buscarSocio(dniSocio);
+        socio.setConducta(conducta);
+    }
+    public void borrarConducta(int dniSocio){
+        Socio socio = buscarSocio(dniSocio);
+        socio.setConducta(null);
+    }
+    public void actualizarConducta(Conducta conducta, int dniSocio){
+        Socio socio = buscarSocio(dniSocio);
+        socio.setConducta(conducta);
+    }
+
+
+    public Conducta busarConducta(int dni){
+        for(Socio persona: listaSocios){
+            if(persona.getDni() == dni){
+                return persona.getConducta();
+            }
+        }
+        return null;
+    }
+
+    public Long busarConductaIndice(int dni){
+        for(Socio persona: listaSocios){
+            if(persona.getDni() == dni){
+                return persona.getConducta().getId();
+            }
+        }
+        return null;
     }
 }
