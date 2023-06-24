@@ -1,25 +1,22 @@
 package controllers;
 
-import model.Conducta;
-import model.Prestamo;
-import model.Socio;
-import model.Suspension;
+import model.*;
 
 import java.util.List;
 
 public class ControlerSocios {
-    private ControlerSocios instancia;
+    private static ControlerSocios instancia;
     private List<Socio> listaSocios;
 
     private ControlerSocios(){ }
 
-    public ControlerSocios getInstancia() {
+    public static ControlerSocios getInstancia() {
         if(instancia == null)
             instancia = new ControlerSocios();
         return instancia;
     }
     //CRUD SOCIOS
-    public void crearSocio(Socio socio){
+    public void crearSocio(Socio socio){;
         listaSocios.add(socio);
     }
     public void borrarSocio(int dni){

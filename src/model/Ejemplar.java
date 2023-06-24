@@ -7,7 +7,7 @@ public abstract class Ejemplar {
     private String titulo;
     private String autor;
     private int anioPublicacion;
-    //categoria?
+
     // Si creo q si, seria un atributo del la clase hijo
 
 

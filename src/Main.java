@@ -1,3 +1,12 @@
+import controllers.ControlerEjemplar;
+import controllers.ControlerPrestamo;
+import controllers.ControlerSocios;
+import model.*;
+import statePrestamo.EstadoPrestamo;
+
+import java.time.LocalDate;
+
+
 public class Main {
     public static void main(String[] args) {
         /*
@@ -10,6 +19,15 @@ public class Main {
             aplicacionMensajeria.setMedioNotificacion(new SMS(new AdaptadorTwilio()));
             aplicacionMensajeria.enviarNotificacion(new Notificacion("+5411123456789", "Hola!"));
 
+            -- PRUEBAS --
         */
+        ControlerSocios controlerSocios =ControlerSocios.getInstancia();
+        ControlerEjemplar controlerEjemplar =ControlerEjemplar.getInstacia();
+        ControlerPrestamo controlerPrestamo = ControlerPrestamo.getInstancia();
+
+        controlerSocios.crearSocio(new Socio(44749039, "Juan", "Canestrari", "juanchicanestra@gmail.com", 1140646891, EnumMedioDeComunicacion.email));
+        controlerEjemplar.crearEjemplar(new Libro(1L, "Pricipito", "Nose quien escribio el principito", 1223));
+        controlerPrestamo.crearPrestamo(new Prestamo(10L, "", 10, , ,  ));
+
     }
 }

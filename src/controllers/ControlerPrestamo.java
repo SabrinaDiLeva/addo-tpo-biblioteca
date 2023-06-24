@@ -6,12 +6,12 @@ import model.Prestamo;
 import java.util.List;
 
 public class ControlerPrestamo {
-    private ControlerPrestamo instancia;
+    private static ControlerPrestamo instancia;
     private List<Prestamo> listaPrestamos;
 
     private ControlerPrestamo(){}
 
-    public ControlerPrestamo getInstancia(){
+    public static ControlerPrestamo getInstancia(){
         if(instancia == null)
             instancia = new ControlerPrestamo();
         return instancia;

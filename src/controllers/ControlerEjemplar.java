@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControlerEjemplar {
-    private ControlerEjemplar instancia;
+    private static ControlerEjemplar instancia;
     private List<Ejemplar> listaEjemplares;
 
     private ControlerEjemplar(){}
 
-    public ControlerEjemplar getInstacia(){
+    public static ControlerEjemplar getInstacia(){
         if (instancia == null)
             instancia = new ControlerEjemplar();
-        return this.instancia;
+        return instancia;
     }
-    public void cargarEjemplares(Ejemplar ejemplar){
+    public void crearEjemplar(Ejemplar ejemplar){
         listaEjemplares.add(ejemplar);
     }
     public void actualizarEjemplar(Ejemplar ejemplar){
