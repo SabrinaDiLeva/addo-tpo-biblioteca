@@ -5,7 +5,7 @@ import model.Prestamo;
 import java.util.List;
 
 public class ControlerPrestamo {
-    private ControlerPrestamo instancia; // TODO a veces se le pone static pero nose el fundamento
+    private ControlerPrestamo instancia;
     private List<Prestamo> listaPrestamos;
 
     private ControlerPrestamo(){}
