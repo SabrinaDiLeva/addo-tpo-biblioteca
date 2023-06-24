@@ -1,6 +1,7 @@
 package controllers;
 
 import model.Ejemplar;
+import model.Socio;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,6 +36,14 @@ public class ControlerEjemplar {
             }
         }
         return -1;
+    }
+    public Ejemplar buscarEjemplar(Long id){
+        for(Ejemplar ejemplar: listaEjemplares){
+            if(ejemplar.getId() == id){
+                return ejemplar;
+            }
+        }
+        return null;
     }
 
     public List<Ejemplar> buscarEjemplarXTitulo(String titulo){

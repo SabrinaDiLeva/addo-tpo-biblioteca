@@ -1,5 +1,6 @@
 package controllers;
 
+import model.Notificacion;
 import model.Prestamo;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class ControlerPrestamo {
         listaPrestamos.add(prestamo);
     }
     public void borrarPrestamo(Long id){
-        Prestamo prestamo = devolverPrestamo(id);
+        Prestamo prestamo = buscarPrestamo(id);
         listaPrestamos.remove(prestamo);
     }
     public void actualizarPrestamo(Prestamo prestamo){
@@ -43,7 +44,7 @@ public class ControlerPrestamo {
         return -1;
     }
 
-    public Prestamo devolverPrestamo(Long id){
+    public Prestamo buscarPrestamo(Long id){
         for(Prestamo i: listaPrestamos){
             if(i.getId() == id)
                 return i;
@@ -51,4 +52,6 @@ public class ControlerPrestamo {
         }
         return null;
     }
+
+
 }

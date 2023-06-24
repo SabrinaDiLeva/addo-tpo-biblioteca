@@ -3,6 +3,7 @@ package controllers;
 import model.Conducta;
 import model.Prestamo;
 import model.Socio;
+import model.Suspension;
 
 import java.util.List;
 
@@ -89,17 +90,16 @@ public class ControlerSocios {
         Socio socio = buscarSocio(dniSocio);
         socio.setConducta(conducta);
     }
-    public void borrarConducta(int dniSocio){
+    /*public void borrarConducta(int dniSocio){
         Socio socio = buscarSocio(dniSocio);
         socio.setConducta(null);
-    }
+    }*/
     public void actualizarConducta(Conducta conducta, int dniSocio){
         Socio socio = buscarSocio(dniSocio);
         socio.setConducta(conducta);
     }
 
-
-    public Conducta busarConducta(int dni){
+    public Conducta buscarConducta(int dni){
         for(Socio persona: listaSocios){
             if(persona.getDni() == dni){
                 return persona.getConducta();
@@ -108,12 +108,51 @@ public class ControlerSocios {
         return null;
     }
 
-    public Long busarConductaIndice(int dni){
-        for(Socio persona: listaSocios){
-            if(persona.getDni() == dni){
-                return persona.getConducta().getId();
+    public int buscarConductaIndice(int dni){
+        return buscarSocioIndice(dni);
+    }
+
+    //CRUD Suspension
+    public void crearSuspenion(Suspension suspension, int dniSocio){
+        Socio socio = buscarSocio(dniSocio);
+        Conducta conducta =socio.getConducta();
+        List<Suspension> suspensionesActuales =conducta.getSuspensiones();
+        suspensionesActuales.add(suspension);
+        conducta.setSuspensiones(suspensionesActuales);
+    }
+
+    /*public void borrarSuspension(Suspension suspension, int dniSocio){
+        Socio socio = buscarSocio(dniSocio);
+        Conducta conducta =socio.getConducta();
+        List<Suspension> suspensionesActuales =conducta.getSuspensiones();
+        suspensionesActuales.remove(suspension);
+        conducta.setSuspensiones(suspensionesActuales);
+        socio.setConducta(conducta);
+    }*/
+
+
+    public void actualizarSuspension(Suspension suspension, int dniSocio){
+        Socio socio = buscarSocio(dniSocio);
+        Conducta conducta =socio.getConducta();
+        List<Suspension> suspensionesActuales =conducta.getSuspensiones();
+        int indice= suspensionesActuales.indexOf(suspension);
+        suspensionesActuales.set(indice, suspension);
+        conducta.setSuspensiones(suspensionesActuales);
+        socio.setConducta(conducta);
+    }
+
+
+    public Suspension buscarSuspension(Long id){
+        for(Socio socio: listaSocios){
+            List<Suspension> suspensiones = socio.getConducta().getSuspensiones();
+            for(Suspension s : suspensiones){
+                if(s.getId()==id){
+                    return s;
+                }
             }
         }
         return null;
     }
+
+
 }
