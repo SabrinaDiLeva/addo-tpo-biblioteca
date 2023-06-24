@@ -1,12 +1,20 @@
 package model;
 
-import java.time.LocalDate;
+import observer.Observer;
+import observer.Sujeto;
+import statePrestamo.EstadoPrestamo;
 
-public class Notificacion {
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Notificacion implements Observer {
     private Long id;
     private String mensajePredefinido;
     private LocalDate fecha;
     private String motivo; //modificar a enum
+
+
 
     public Notificacion(Long id, String mensajePredefinido, LocalDate fecha, String motivo) {
         this.id = id;
@@ -45,5 +53,14 @@ public class Notificacion {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
+    }
+
+
+
+    @Override
+    public void actualizar(Sujeto observable) {
+        
+
+        System.out.println("Notificacion ");
     }
 }

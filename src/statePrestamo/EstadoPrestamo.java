@@ -1,8 +1,9 @@
 package statePrestamo;
 
 import model.Prestamo;
+import observer.Sujeto;
 
-public abstract class EstadoPrestamo {
+public abstract class EstadoPrestamo implements Sujeto {
     protected Prestamo prestamo;
 
     public EstadoPrestamo(Prestamo prestamos){
