@@ -27,11 +27,11 @@ public class AdaptadorAngus implements IAdaptadorEmail{
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("no-reply@miempresa.com"));
             message.setRecipients(
-                    Message.RecipientType.TO, InternetAddress.parse(notificacion.getDestinatario()));
+                    Message.RecipientType.TO, InternetAddress.parse(notificacion.getPrestamo().getSocio().getEmail()));
             message.setSubject("Mail Subject");
 
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
-            mimeBodyPart.setContent(notificacion.getCuerpoMensaje(), "text/html; charset=utf-8");
+            mimeBodyPart.setContent(notificacion.getMensajePredefinido(), "text/html; charset=utf-8");
 
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(mimeBodyPart);

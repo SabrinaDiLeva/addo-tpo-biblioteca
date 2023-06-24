@@ -14,9 +14,10 @@ public class EnCurso extends EstadoPrestamo {
 
     @Override
     public void proxAvencer() { // aca estaria asociado el observer
-        prestamo.setEstado(new ProximoAVencer(prestamo));
+        EstadoPrestamo estado = new ProximoAVencer(prestamo);
+        prestamo.setEstado(estado);
+        notificar(this,estado);
         System.out.println("El prestamo esta por vencer");
-
     }
 
     @Override
@@ -26,7 +27,9 @@ public class EnCurso extends EstadoPrestamo {
 
     @Override
     public void cerrado() {
-        prestamo.setEstado(new Cerrado(prestamo));
+        EstadoPrestamo estado = new Cerrado(prestamo);
+        prestamo.setEstado(estado);
+        notificar(this,estado);
         System.out.println("El prestamo fue devuelto");
     }
 
@@ -43,9 +46,9 @@ public class EnCurso extends EstadoPrestamo {
     }
 
     @Override
-    public void notificar() {
+    public void notificar(EstadoPrestamo estadoActual, EstadoPrestamo estadoProximo) {
         for (int i = 0; i < this.observers.size(); i++) {
-            this.observers.get(i).actualizar(this);
+            this.observers.get(i).actualizar(estadoActual, estadoProximo);
         }
     }
 }

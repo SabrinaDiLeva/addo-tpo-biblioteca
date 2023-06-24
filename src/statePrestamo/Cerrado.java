@@ -23,7 +23,6 @@ public class Cerrado extends EstadoPrestamo{
     @Override
     public void cerrado() {
         System.out.println("El Prestamo ya fue devuelto");
-        notificar();
     }
 
     @Override
@@ -39,7 +38,9 @@ public class Cerrado extends EstadoPrestamo{
     }
 
     @Override
-    public void notificar() {
-
+    public void notificar(EstadoPrestamo estadoActual, EstadoPrestamo estadoProximo) {
+        for (int i = 0; i < this.observers.size(); i++) {
+            this.observers.get(i).actualizar(estadoActual, estadoProximo);
+        }
     }
 }

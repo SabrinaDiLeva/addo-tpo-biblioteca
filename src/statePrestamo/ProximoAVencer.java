@@ -19,18 +19,17 @@ public class ProximoAVencer extends EstadoPrestamo{
 
     @Override
     public void vencido() {
-        prestamo.setEstado(new Vencido(prestamo));
-        System.out.println("El prestamo se venció");
 
-        notificar();
+        EstadoPrestamo estado = new Vencido(prestamo);
+        prestamo.setEstado(estado);
+        notificar(this,estado);
+        System.out.println("El prestamo se venció");
     }
 
     @Override
     public void cerrado() {
         prestamo.setEstado(new Cerrado(prestamo));
         System.out.println("El prestamo fue devuelto");
-
-        notificar();
     }
 
     @Override
@@ -46,9 +45,9 @@ public class ProximoAVencer extends EstadoPrestamo{
     }
 
     @Override
-    public void notificar() {
-        for (Observer i : observers){
-            i.actualizar(this);
+    public void notificar(EstadoPrestamo estadoActual, EstadoPrestamo estadoProximo) {
+        for (int i = 0; i < this.observers.size(); i++) {
+            this.observers.get(i).actualizar(estadoActual, estadoProximo);
         }
     }
 }

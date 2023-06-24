@@ -16,18 +16,18 @@ public class AdaptadorTwilio implements IAdaptadorWhatsApp, IAdaptadorSMS {
     public void enviarSMS(Notificacion notificacion) {
         Message
                 .creator(
-                        new PhoneNumber(notificacion.getDestinatario()),
+                        new PhoneNumber(Integer.toString(notificacion.getPrestamo().getSocio().getTelefono())),    // TODO ver lo del destinatario
                         new PhoneNumber("+15017250604"),
-                        notificacion.getCuerpoMensaje()
+                        notificacion.getMensajePredefinido()
                 )
                 .create();
     }
 
     public void enviarWhatsApp(Notificacion notificacion) {
         Message.creator(
-                        new com.twilio.type.PhoneNumber(String.format("whatsapp:%s", notificacion.getDestinatario())),
+                        new com.twilio.type.PhoneNumber(String.format("whatsapp:%s", Integer.toString(notificacion.getPrestamo().getSocio().getTelefono()))),
                         new com.twilio.type.PhoneNumber("whatsapp:+14155238886"),
-                        notificacion.getCuerpoMensaje())
+                        notificacion.getMensajePredefinido())
                 .create();
     }
 }
