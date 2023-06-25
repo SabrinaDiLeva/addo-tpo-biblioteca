@@ -106,6 +106,7 @@ public class ControlerPrestamo {
         listaPrestamos.remove(prestamo);
     }
     public void actualizarPrestamo(Prestamo prestamo){
+        //revisar
         int indice = buscarPrestamoIndice(prestamo.getId());
         if(indice >= 0){
             listaPrestamos.get(indice).setSocio(prestamo.getSocio());
@@ -166,6 +167,9 @@ public class ControlerPrestamo {
         Prestamo prestamo = buscarPrestamo(id);
         if (prestamo.getEstado() instanceof EnCurso || prestamo.getEstado() instanceof  ProximoAVencer) {
             prestamo.setDuracion(dias);
+            actualizarPrestamo(prestamo);
+            calcularFechaFin(prestamo);
+            actualizarPrestamo(prestamo);
             System.out.println("Se cambio la cantidad de dias del prestamo '"+id+"' a " + dias+" dias.");
         }
         else{
