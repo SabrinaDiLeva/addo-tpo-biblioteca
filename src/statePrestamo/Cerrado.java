@@ -19,18 +19,18 @@ public class Cerrado extends EstadoPrestamo{
 
     @Override
     public void vencido() {
-        System.out.println("El Prestamo ya fue devuelto");
+        System.out.println("El Prestamo ya fue devuelto.");
     }
 
     @Override
-    public void cerrado() {
-        System.out.println("El Prestamo ya fue devuelto");
+    public void cerrado(int dias) {
+        System.out.println("El Prestamo ya fue devuelto.");
     }
 
     @Override
     public void agregar(Observer observador) {
         observers.add(observador);
-        System.out.println("Suscribiendo observador");
+        System.out.println("Suscribiendo observador.");
     }
 
     @Override

@@ -119,13 +119,28 @@ public class Main {
 
         System.out.println();
         System.out.println("Actualizamos estado de Vencido a Cerrado:");
-        controlerPrestamo.cerrado(1L);
+        controlerPrestamo.cerradoFueraDeFecha(1L,11);
 
         System.out.println();
         System.out.println("-----------------------------------------");
-        //Cargamos otro prestamo
+        //Cargamos un prestamo fallido
         System.out.println();
         System.out.println("Carga de PRESTAMO");
+        controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 3L);
+        System.out.println();
+        System.out.println("-----------------------------------------");
+
+        //Regularizar situacion con el bibliotecario
+        System.out.println();
+        System.out.println("REGULARIZACION:");
+        controlerSocios.regularizarSituacion(LocalDate.now(),44749039);
+
+        System.out.println();
+        System.out.println("-----------------------------------------");
+
+        //El socio ahora puede volver a solicitar un prestamo
+        System.out.println();
+        System.out.println("Nueva solicitud de PRESTAMO");
         controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 3L);
 
         // ACTUALIZAR ESTADOS:

@@ -2,6 +2,7 @@ package controllers;
 
 import model.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class ControlerSocios {
     public void crearSocio(int dni, String nombre, String apellido, String email, int telefono, EnumMedioDeComunicacion medioDeComunicacion){;
         Socio socio = new Socio(dni, nombre, apellido,email,telefono,medioDeComunicacion);
         listaSocios.add(socio);
+        crearConducta(0,0,socio.getDni());
         System.out.println("Se agrego correctamente al socio '"+nombre+"'. Ahora hay "+listaSocios.size()+" socios en total.");
     }
     public void borrarSocio(int dni){
@@ -86,9 +88,12 @@ public class ControlerSocios {
 
 
     //CRUD CONDUCTA
-    public void crearConducta(Conducta conducta, int dniSocio){
+    public void crearConducta(int diasAtrasados, int prestamosPuntuales, int dniSocio){
         Socio socio = buscarSocio(dniSocio);
+        Conducta conducta = new Conducta(diasAtrasados,prestamosPuntuales);
         socio.setConducta(conducta);
+        int indice = buscarSocioIndice(dniSocio);
+        listaSocios.add(indice,socio);
     }
     /*public void borrarConducta(int dniSocio){
         Socio socio = buscarSocio(dniSocio);
@@ -113,12 +118,15 @@ public class ControlerSocios {
     }
 
     //CRUD Suspension
-    public void crearSuspenion(Suspension suspension, int dniSocio){
+    public void crearSuspenion(LocalDate fecha, int dniSocio){
         Socio socio = buscarSocio(dniSocio);
+        int indice = buscarSocioIndice(dniSocio);
         Conducta conducta =socio.getConducta();
         List<Suspension> suspensionesActuales =conducta.getSuspensiones();
-        suspensionesActuales.add(suspension);
+        suspensionesActuales.add(new Suspension(fecha));
         conducta.setSuspensiones(suspensionesActuales);
+        socio.setConducta(conducta);
+        listaSocios.add(indice,socio);
     }
 
     /*public void borrarSuspension(Suspension suspension, int dniSocio){
@@ -133,20 +141,46 @@ public class ControlerSocios {
 
     public void actualizarSuspension(Suspension suspension, int dniSocio){
         Socio socio = buscarSocio(dniSocio);
+        int indiceSocio =buscarSocioIndice(dniSocio);
         Conducta conducta =socio.getConducta();
         List<Suspension> suspensionesActuales =conducta.getSuspensiones();
         int indice= suspensionesActuales.indexOf(suspension);
         suspensionesActuales.set(indice, suspension);
         conducta.setSuspensiones(suspensionesActuales);
         socio.setConducta(conducta);
+        listaSocios.add(indiceSocio,socio);
+    }
+
+    public void regularizarSituacion(LocalDate fecha, int dniSocio){
+        Socio socio = buscarSocio(dniSocio);
+        int indiceSocio = buscarSocioIndice(dniSocio);
+
+        //le agregamos una fecha de fin a la suspension
+        List<Suspension> suspensiones = socio.getConducta().getSuspensiones();
+        int indice = suspensiones.size()-1;
+        Suspension suspensionActual = suspensiones.get(indice);
+        suspensionActual.setFechaFin(fecha);
+        suspensiones.add(indice,suspensionActual);
+
+        socio.getConducta().setSuspensiones(suspensiones);
+
+        //le quitamos 10 dias atrasados
+        int diasAtrasados = socio.getConducta().getDiasAtradados();
+        diasAtrasados=diasAtrasados-10;
+        socio.getConducta().setDiasAtradados(diasAtrasados);
+
+        listaSocios.add(indiceSocio,socio);
+        System.out.println("La situacion ha sido regularizada exitosamente con el bibliotecario.");
+        System.out.println("La suspension del socio "+socio.getDni()+" ha finalizado el "+fecha.toString()+".");
+        System.out.println("Se han restado 10 dias atrasados de su historial. Cuenta actualmente con "+socio.getConducta().getDiasAtradados()+" dias atrasados.");
     }
 
 
-    public Suspension buscarSuspension(Long id){
+    public Suspension buscarSuspension(LocalDate fechaInicio){
         for(Socio socio: listaSocios){
             List<Suspension> suspensiones = socio.getConducta().getSuspensiones();
             for(Suspension s : suspensiones){
-                if(s.getId()==id){
+                if(s.getFechaInicio()==fechaInicio){
                     return s;
                 }
             }

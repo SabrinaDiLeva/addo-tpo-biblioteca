@@ -14,9 +14,10 @@ public class ProximoAVencer extends EstadoPrestamo{
         super(prestamo);
         observers= new ArrayList<>();
     }
+
     @Override
     public void proxAvencer() {
-        System.out.println("El prestamo esta próximo a vencer");
+        System.out.println("El prestamo esta próximo a vencer.");
     }
 
     @Override
@@ -24,15 +25,28 @@ public class ProximoAVencer extends EstadoPrestamo{
         EstadoPrestamo estado = new Vencido(prestamo);
         prestamo.setEstado(estado);
         notificar(this,estado);
-        System.out.println("El prestamo se vencio");
+        System.out.println("El prestamo se vencio.");
+
     }
 
     @Override
-    public void cerrado() {
+    public void cerrado(int dias) {
         EstadoPrestamo estado = new Cerrado(prestamo);
         prestamo.setEstado(estado);
+
         notificar(this,estado);
-        System.out.println("El prestamo fue devuelto a tiempo");
+        System.out.println("El prestamo fue devuelto a tiempo.");
+
+        //impacto positivo en la conducta del socio
+        int prestamosATiempo= prestamo.getSocio().getConducta().getPrestamosPuntuales();
+        prestamo.getSocio().getConducta().setPrestamosPuntuales(prestamosATiempo+1);
+        prestamosATiempo=prestamosATiempo+1;
+
+        if(prestamosATiempo>=5){
+            System.out.println("El socio "+ prestamo.getSocio().getDni()+" ha devuelto "+prestamosATiempo + " prestamos a tiempo.");
+            System.out.println("Recibira una bonificación de " +(int)Math.floor(prestamosATiempo/5)+" dias en su proximo prestamo.");
+        }
+
     }
 
     @Override

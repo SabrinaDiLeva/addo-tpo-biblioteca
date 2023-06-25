@@ -3,23 +3,22 @@ package model;
 import java.time.LocalDate;
 
 public class Suspension {
-    private Long id;
+    //private Long id;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
 
-    public Suspension(Long id, LocalDate fechaInicio, LocalDate fechaFin) {
-        this.id = id;
+    public Suspension(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.fechaFin=null;
     }
 
-    public Long getId() {
+    /*public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
+    }*/
 
     public LocalDate getFechaInicio() {
         return fechaInicio;

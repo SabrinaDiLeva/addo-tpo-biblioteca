@@ -12,7 +12,7 @@ public abstract class EstadoPrestamo implements Sujeto {
 
     public abstract void proxAvencer();
     public abstract void vencido();
-    public abstract void cerrado();
+    public abstract void cerrado(int dias);
     
 
 }

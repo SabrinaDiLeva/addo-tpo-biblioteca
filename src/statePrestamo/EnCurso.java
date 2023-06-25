@@ -19,20 +19,29 @@ public class EnCurso extends EstadoPrestamo {
         EstadoPrestamo estado = new ProximoAVencer(prestamo);
         prestamo.setEstado(estado);
         notificar(this,estado);
-        System.out.println("El prestamo esta por vencer");
+        System.out.println("El prestamo esta por vencer.");
     }
 
     @Override
     public void vencido() { // no se puede usar, no hay rel
-        System.out.print("El Prestamo esta en curso");
+        System.out.print("El Prestamo esta en curso.");
     }
 
     @Override
-    public void cerrado() {
+    public void cerrado(int dias) {
         EstadoPrestamo estado = new Cerrado(prestamo);
         prestamo.setEstado(estado);
         notificar(this,estado);
-        System.out.println("El prestamo fue devuelto a tiempo");
+        System.out.println("El prestamo fue devuelto a tiempo.");
+
+        //impacto positivo en la conducta del socio
+        int prestamosATiempo= prestamo.getSocio().getConducta().getPrestamosPuntuales();
+        prestamo.getSocio().getConducta().setPrestamosPuntuales(prestamosATiempo+1);
+
+        if(prestamo.getSocio().getConducta().getPrestamosPuntuales()>=5){
+            System.out.println("El socio "+ prestamo.getSocio().getDni()+" ha devuelto "+prestamosATiempo + " prestamos a tiempo.");
+            System.out.println("Recibira una bonificación de " +(int)Math.floor(prestamosATiempo/5)+" dias en su proximo prestamo.");
+        }
     }
 
     @Override

@@ -1,12 +1,9 @@
 package controllers;
 
 import model.*;
-import statePrestamo.EnCurso;
-import statePrestamo.EstadoPrestamo;
+import statePrestamo.*;
 import controllers.ControlerSocios;
 import controllers.ControlerEjemplar;
-import statePrestamo.ProximoAVencer;
-import statePrestamo.Vencido;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,13 +26,33 @@ public class ControlerPrestamo {
 
     public void crearPrestamo(LocalDate fechaInicio, int dniSocio, Long idEjemplar){
         Socio socio= controlerSocios.buscarSocio(dniSocio);
-        Ejemplar ejemplar = controlerEjemplar.buscarEjemplar(idEjemplar);
-        Long id = Long.valueOf(listaPrestamos.size()+1);
-        int duracion = calcularDuracionPrestamo(socio,ejemplar);
-        Prestamo prestamo= new Prestamo(id, fechaInicio,duracion,null,socio,ejemplar);
-        prestamo.setEstado(new EnCurso(prestamo));
-        listaPrestamos.add(prestamo);
-        System.out.println("El prestamo '"+id+"' fue creado con exito. Se encuentra '"+prestamo.getEstado().getClass().getSimpleName()+"' y tendra una duracion de "+prestamo.getDuracion()+" dias.");
+
+        //controlar que no este suspendido
+        if(puedeSolicitarPrestamo(socio)){
+            Ejemplar ejemplar = controlerEjemplar.buscarEjemplar(idEjemplar);
+            Long id = Long.valueOf(listaPrestamos.size()+1);
+            int duracion = calcularDuracionPrestamo(socio,ejemplar);
+            Prestamo prestamo= new Prestamo(id, fechaInicio,duracion,null,socio,ejemplar);
+            prestamo.setEstado(new EnCurso(prestamo));
+            listaPrestamos.add(prestamo);
+            System.out.println("El prestamo '"+id+"' fue creado con exito. Se encuentra '"+prestamo.getEstado().getClass().getSimpleName()+"' y tendra una duracion de "+prestamo.getDuracion()+" dias.");
+        }else{
+            System.out.println("El socio "+socio.getDni()+" no puede solicitar un prestamo porque esta suspendido actualmente, debe regularizar su situacion con el bibliotecario.");
+        }
+    }
+    public boolean puedeSolicitarPrestamo(Socio socio){
+        List<Suspension> suspensiones = socio.getConducta().getSuspensiones();
+        int indice=-1;
+        if(suspensiones.size()==0){
+            return true;
+        }else{
+            indice= suspensiones.size()-1;
+        }
+        if(suspensiones.get(indice).getFechaFin()!=null){
+            return true;
+        }else{
+            return false;
+        }
     }
     public int calcularDuracionPrestamo(Socio socio, Ejemplar ejemplar){
         int duracion=0;
@@ -97,7 +114,14 @@ public class ControlerPrestamo {
 
     public void cerrado(Long id){
         Prestamo prestamo = buscarPrestamo(id);
-        prestamo.getEstado().cerrado();
+        prestamo.getEstado().cerrado(0);
+        EstadoPrestamo estado = new Cerrado(prestamo);
+        prestamo.setEstado(estado);
+    }
+
+    public void cerradoFueraDeFecha(Long id, int dias){
+        Prestamo prestamo = buscarPrestamo(id);
+        prestamo.getEstado().cerrado(dias);
         EstadoPrestamo estado = new Vencido(prestamo);
         prestamo.setEstado(estado);
     }
