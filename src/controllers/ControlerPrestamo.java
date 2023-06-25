@@ -34,6 +34,7 @@ public class ControlerPrestamo {
             Long id = Long.valueOf(listaPrestamos.size()+1);
             int duracion = calcularDuracionPrestamo(socio,ejemplar);
             Prestamo prestamo= new Prestamo(id, fechaInicio,duracion,null,socio,ejemplar);
+            calcularFechaFin(prestamo);
             prestamo.setEstado(new EnCurso(prestamo));
             listaPrestamos.add(prestamo);
 
@@ -46,6 +47,12 @@ public class ControlerPrestamo {
         }else{
             System.out.println("El socio "+socio.getDni()+" no puede solicitar un prestamo porque esta suspendido actualmente, debe regularizar su situacion con el bibliotecario.");
         }
+    }
+    public void calcularFechaFin(Prestamo prestamo){
+        LocalDate fechaInicio= prestamo.getFechaInicio();
+        LocalDate fechaFinal = fechaInicio.plusDays(prestamo.getDuracion());
+        prestamo.setFechaDevolucion(fechaFinal);
+        actualizarPrestamo(prestamo);
     }
     public boolean puedeSolicitarPrestamo(Socio socio){
         List<Suspension> suspensiones = socio.getConducta().getSuspensiones();
@@ -151,7 +158,7 @@ public class ControlerPrestamo {
     public void cerradoFueraDeFecha(Long id, int dias) {
         Prestamo prestamo = buscarPrestamo(id);
         prestamo.getEstado().cerrado(dias);
-        EstadoPrestamo estado = new Vencido(prestamo);
+        EstadoPrestamo estado = new Cerrado(prestamo);
         prestamo.setEstado(estado);
     }
 
@@ -159,7 +166,7 @@ public class ControlerPrestamo {
         Prestamo prestamo = buscarPrestamo(id);
         if (prestamo.getEstado() instanceof EnCurso || prestamo.getEstado() instanceof  ProximoAVencer) {
             prestamo.setDuracion(dias);
-            System.out.println("Se cambio la cantidad de dias a: " + dias);
+            System.out.println("Se cambio la cantidad de dias del prestamo '"+id+"' a " + dias+" dias.");
         }
         else{
             System.out.println("No se puede cambiar la cantidad de dias porque el prestamo ya esta cerrado/vencido");

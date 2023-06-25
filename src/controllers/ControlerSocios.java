@@ -76,12 +76,15 @@ public class ControlerSocios {
         List<Prestamo> listaDePrestamos = aux.getPrestamos();
         System.out.println("Historial de el socio: "+ aux.getNombre());
         for (Prestamo prestamo: listaDePrestamos){
+            System.out.println();
             System.out.println("Id de prestamo: " + prestamo.getId());
             System.out.println("Nombre del Ejemplar: " + prestamo.getTituloEjemplar());
             System.out.println("Fecha inicio: "+ prestamo.getFechaInicio().toString());
             System.out.println("Duracion: " + prestamo.getDuracion());
-            System.out.println("Fecha devolucion: " + prestamo.getFechaDevolucion().toString());    // PORQUE ESTA LA FECHA EN INT ??
-            System.out.print("Estado: "+ prestamo.getEstado());
+            if(prestamo.getFechaDevolucion()!=null){
+                System.out.println("Fecha devolucion: " + prestamo.getFechaDevolucion().toString());
+            }
+            System.out.println("Estado: "+ prestamo.getEstado().getClass().getSimpleName());
 
         }
     }

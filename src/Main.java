@@ -199,25 +199,27 @@ public class Main {
         controlerPrestamo.crearPrestamo(LocalDate.now(),44749039, 2L);
         controlerPrestamo.cerrado(9L);
 
-        //contro
+        //carry on de dias pendientes
         System.out.println();
         System.out.println("-----------------------------------------");
         System.out.println();
         System.out.println("Se descuentan los dias atrasados pendientes del prestamo anterior.");
         controlerPrestamo.crearPrestamo(LocalDate.now(),44749039, 5L);
-        controlerPrestamo.cerrado(10L);
+        //controlerPrestamo.cerrado(10L);
 
         // ACTAULIZAR PARAMETROS DE PRESTAMOS (DIAS)
-        // ABRIA UN METODO EN EL CONTROLER DE PRESTAMOS QUE CAMBIE SOLO LA DURACION
-
-         //controlerPrestamo.cambiarDias()
-
-        // NOTIFICAR SOBRE SITUACIONES PARTICULAES
-        // YYY ESTO VA DE LA MANO DE LOS ESTADOS
-
+        System.out.println();
+        System.out.println("-----------------------------------------");
+        System.out.println();
+        System.out.println("Bibliotecario modifica manualmente la cantidad de dias de un prestamo.");
+        controlerPrestamo.cambiarDias(10L,9);
 
         // VISUALIZAR HISTORIAL DE PRESTAMOS DE UN SOCIO
-
-        // controlerSocios.verHistorialSocio(44749039);
+        System.out.println();
+        System.out.println("-----------------------------------------");
+        System.out.println();
+        System.out.println("VER HISTORIAL DE UN SOCIO:");
+        controlerSocios.verHistorialSocio(44749039);
+        
     }
 }

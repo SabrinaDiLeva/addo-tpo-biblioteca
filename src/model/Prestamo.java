@@ -46,7 +46,8 @@ public class Prestamo {
         this.duracion = duracion;
     }
 
-    public LocalDate getFechaDevolucion() {
+    public LocalDate getFechaDevolucion() { // todayDate.plusDays(1);
+
         return fechaDevolucion;
     }
 
