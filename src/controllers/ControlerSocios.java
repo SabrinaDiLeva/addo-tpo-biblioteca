@@ -93,7 +93,7 @@ public class ControlerSocios {
         Conducta conducta = new Conducta(diasAtrasados,prestamosPuntuales);
         socio.setConducta(conducta);
         int indice = buscarSocioIndice(dniSocio);
-        listaSocios.add(indice,socio);
+        listaSocios.set(indice,socio);
     }
     /*public void borrarConducta(int dniSocio){
         Socio socio = buscarSocio(dniSocio);
@@ -126,7 +126,7 @@ public class ControlerSocios {
         suspensionesActuales.add(new Suspension(fecha));
         conducta.setSuspensiones(suspensionesActuales);
         socio.setConducta(conducta);
-        listaSocios.add(indice,socio);
+        listaSocios.set(indice,socio);
     }
 
     /*public void borrarSuspension(Suspension suspension, int dniSocio){
@@ -148,7 +148,7 @@ public class ControlerSocios {
         suspensionesActuales.set(indice, suspension);
         conducta.setSuspensiones(suspensionesActuales);
         socio.setConducta(conducta);
-        listaSocios.add(indiceSocio,socio);
+        listaSocios.set(indiceSocio,socio);
     }
 
     public void regularizarSituacion(LocalDate fecha, int dniSocio){
@@ -160,7 +160,7 @@ public class ControlerSocios {
         int indice = suspensiones.size()-1;
         Suspension suspensionActual = suspensiones.get(indice);
         suspensionActual.setFechaFin(fecha);
-        suspensiones.add(indice,suspensionActual);
+        suspensiones.set(indice,suspensionActual);
 
         socio.getConducta().setSuspensiones(suspensiones);
 
@@ -169,7 +169,7 @@ public class ControlerSocios {
         diasAtrasados=diasAtrasados-10;
         socio.getConducta().setDiasAtradados(diasAtrasados);
 
-        listaSocios.add(indiceSocio,socio);
+        listaSocios.set(indiceSocio,socio);
         System.out.println("La situacion ha sido regularizada exitosamente con el bibliotecario.");
         System.out.println("La suspension del socio "+socio.getDni()+" ha finalizado el "+fecha.toString()+".");
         System.out.println("Se han restado 10 dias atrasados de su historial. Cuenta actualmente con "+socio.getConducta().getDiasAtradados()+" dias atrasados.");
