@@ -38,16 +38,16 @@ public class Main {
         System.out.println();
         System.out.println("Carga de EJEMPLAR:");
         //      LIBRO
-        controlerEjemplar.crearEjemplar(1L, "Pricipito", "Antoine de Saint-Exupery", 1223, EnumCategoriaEjemplar.Libro);
+        controlerEjemplar.crearEjemplar("Pricipito", "Antoine de Saint-Exupery", 1223, EnumCategoriaEjemplar.Libro);
 
         //      REVISTA
-        controlerEjemplar.crearEjemplar(2L, "HOLA!", "Antonio Sanchez Gomez", 2017, EnumCategoriaEjemplar.Revista);
+        controlerEjemplar.crearEjemplar( "HOLA!", "Antonio Sanchez Gomez", 2017, EnumCategoriaEjemplar.Revista);
 
         //      REVISTA ESPECIALIZADA
-        controlerEjemplar.crearEjemplar(3L, "Todo sobre autos modernos", "Alain Prost", 1980, EnumCategoriaEjemplar.RevistaEspecializada);
+        controlerEjemplar.crearEjemplar( "Todo sobre autos modernos", "Alain Prost", 1980, EnumCategoriaEjemplar.RevistaEspecializada);
 
         //      DIARIO
-        controlerEjemplar.crearEjemplar(4L, "Clarin", "Leopoldo Alas", 2023, EnumCategoriaEjemplar.Diario);
+        controlerEjemplar.crearEjemplar("Clarin", "Leopoldo Alas", 2023, EnumCategoriaEjemplar.Diario);
 
         System.out.println();
         System.out.println("-----------------------------------------");
@@ -106,7 +106,7 @@ public class Main {
         // CARGA DE PRESTAMOS
         System.out.println();
         System.out.println("Carga de PRESTAMO");
-        controlerPrestamo.crearPrestamo(1L, LocalDate.now(), 44749039, 1L);
+        controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 1L);
 
         // ACTUALIZAR ESTADOS:
         System.out.println();
@@ -126,7 +126,7 @@ public class Main {
         //Cargamos otro prestamo
         System.out.println();
         System.out.println("Carga de PRESTAMO");
-        controlerPrestamo.crearPrestamo(2L, LocalDate.now(), 44749039, 3L);
+        controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 3L);
 
         // ACTUALIZAR ESTADOS:
         System.out.println();

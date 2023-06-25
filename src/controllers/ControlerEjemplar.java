@@ -17,8 +17,9 @@ public class ControlerEjemplar {
             instancia = new ControlerEjemplar();
         return instancia;
     }
-    public void crearEjemplar(Long id, String titulo, String autor, int anioPublicacion, EnumCategoriaEjemplar categoria){
+    public void crearEjemplar(String titulo, String autor, int anioPublicacion, EnumCategoriaEjemplar categoria){
         Ejemplar ejemplar = null;
+        Long id = Long.valueOf(listaEjemplares.size()+1);
         if(categoria.equals(EnumCategoriaEjemplar.Libro)){
             ejemplar = new Libro(id, titulo, autor, anioPublicacion);
         }else if(categoria.equals(EnumCategoriaEjemplar.Diario)){
@@ -29,7 +30,7 @@ public class ControlerEjemplar {
             ejemplar = new RevistaEspecializada(id, titulo, autor, anioPublicacion);
         }
         listaEjemplares.add(ejemplar);
-        System.out.println("Se agrego correctamente el ejemplar '"+titulo+"' a la lista. Ahora hay "+listaEjemplares.size()+" ejemplares en total.");
+        System.out.println("Se agrego correctamente el ejemplar '"+titulo+"' con el ID '"+id+"'.");
     }
     public void actualizarEjemplar(Ejemplar ejemplar){
         int indice = buscarEjemplarIndice(ejemplar.getTitulo());

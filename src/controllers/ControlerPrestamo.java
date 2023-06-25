@@ -27,14 +27,15 @@ public class ControlerPrestamo {
         return instancia;
     }
 
-    public void crearPrestamo(Long id, LocalDate fechaInicio, int dniSocio, Long idEjemplar){
+    public void crearPrestamo(LocalDate fechaInicio, int dniSocio, Long idEjemplar){
         Socio socio= controlerSocios.buscarSocio(dniSocio);
         Ejemplar ejemplar = controlerEjemplar.buscarEjemplar(idEjemplar);
+        Long id = Long.valueOf(listaPrestamos.size()+1);
         int duracion = calcularDuracionPrestamo(socio,ejemplar);
         Prestamo prestamo= new Prestamo(id, fechaInicio,duracion,null,socio,ejemplar);
         prestamo.setEstado(new EnCurso(prestamo));
         listaPrestamos.add(prestamo);
-        System.out.println("El prestamo '"+id+"' se encuentra '"+prestamo.getEstado().getClass().getSimpleName()+"' y tendra una duracion de "+prestamo.getDuracion()+" dias.");
+        System.out.println("El prestamo '"+id+"' fue creado con exito. Se encuentra '"+prestamo.getEstado().getClass().getSimpleName()+"' y tendra una duracion de "+prestamo.getDuracion()+" dias.");
     }
     public int calcularDuracionPrestamo(Socio socio, Ejemplar ejemplar){
         int duracion=0;
