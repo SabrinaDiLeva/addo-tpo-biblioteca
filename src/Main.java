@@ -220,6 +220,6 @@ public class Main {
         System.out.println();
         System.out.println("VER HISTORIAL DE UN SOCIO:");
         controlerSocios.verHistorialSocio(44749039);
-        
+
     }
 }

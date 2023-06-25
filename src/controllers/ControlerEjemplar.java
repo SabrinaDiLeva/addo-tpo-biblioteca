@@ -1,5 +1,7 @@
 package controllers;
 
+import adapterUbicacion.IUbicacion;
+import adapterUbicacion.Ubicacion;
 import model.*;
 
 import java.time.LocalDate;
@@ -66,6 +68,10 @@ public class ControlerEjemplar {
         for (Ejemplar ejemplar: listaEjemplares){
             if(ejemplar.getTitulo().equals(titulo)){
                 System.out.println("ID: "+ ejemplar.getId() +", Titulo: "+ejemplar.getTitulo()+", Autor: "+ ejemplar.getAutor()+", AnioPublicacion: "+ejemplar.getAnioPublicacion()+".");
+
+                IUbicacion ubicacion = new Ubicacion();
+                ubicacion.buscarUbicacion(ejemplar.getId());
+
                 ejemplaresXTitulo.add(ejemplar);
             }
         }
@@ -80,6 +86,10 @@ public class ControlerEjemplar {
         for (Ejemplar ejemplar: listaEjemplares){
             if(ejemplar.getAutor().equals(autor)){
                 System.out.println("ID: "+ ejemplar.getId() +", Titulo: "+ejemplar.getTitulo()+", Autor: "+ ejemplar.getAutor()+", AnioPublicacion: "+ejemplar.getAnioPublicacion()+".");
+
+                IUbicacion ubicacion = new Ubicacion();
+                ubicacion.buscarUbicacion(ejemplar.getId());
+
                 ejemplaresXAutor.add(ejemplar);
             }
         }
@@ -94,6 +104,10 @@ public class ControlerEjemplar {
         for (Ejemplar ejemplar: listaEjemplares){
             if(ejemplar.getAnioPublicacion()==anio){
                 System.out.println("ID: "+ ejemplar.getId() +", Titulo: "+ejemplar.getTitulo()+", Autor: "+ ejemplar.getAutor()+", AnioPublicacion: "+ejemplar.getAnioPublicacion()+".");
+
+                IUbicacion ubicacion = new Ubicacion();
+                ubicacion.buscarUbicacion(ejemplar.getId());
+
                 ejemplaresXAnio.add(ejemplar);
             }
         }
@@ -108,6 +122,10 @@ public class ControlerEjemplar {
         for(Ejemplar ejemplar: listaEjemplares){
             if(ejemplar.getClass().getSimpleName().equals(categoria.name())){
                 System.out.println("ID: "+ ejemplar.getId() +", Titulo: "+ejemplar.getTitulo()+", Autor: "+ ejemplar.getAutor()+", AnioPublicacion: "+ejemplar.getAnioPublicacion()+".");
+
+                IUbicacion ubicacion = new Ubicacion();
+                ubicacion.buscarUbicacion(ejemplar.getId());
+
                 ejemplaresXCategoria.add(ejemplar);
             }
         }
