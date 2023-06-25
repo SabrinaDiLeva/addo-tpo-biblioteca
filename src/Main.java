@@ -29,26 +29,80 @@ public class Main {
         ControlerPrestamo controlerPrestamo = ControlerPrestamo.getInstancia();
 
         // CARGAR
-        controlerSocios.crearSocio(new Socio(44749039, "Juan", "Canestrari", "juanchicanestra@gmail.com", 1140646891, EnumMedioDeComunicacion.email));
+        System.out.println("Carga de SOCIO:");
+        controlerSocios.crearSocio(44749039, "Juan", "Canestrari", "juanchicanestra@gmail.com", 1140646891, EnumMedioDeComunicacion.email);
 
         // CARGAR EJEMPLARES
-
+        System.out.println();
+        System.out.println("Carga de EJEMPLAR:");
         //      LIBRO
-        controlerEjemplar.crearEjemplar(new Libro(1L, "Pricipito", "Antoine de Saint-Exupéry", 1223));
+        controlerEjemplar.crearEjemplar(1L, "Pricipito", "Antoine de Saint-Exupery", 1223, EnumCategoriaEjemplar.Libro);
 
         //      REVISTA
-        controlerEjemplar.crearEjemplar(new Revista(2L, "HOLA!", "Antonio Sánchez Gómez ", 2017));
+        controlerEjemplar.crearEjemplar(2L, "HOLA!", "Antonio Sanchez Gomez", 2017, EnumCategoriaEjemplar.Revista);
 
         //      REVISTA ESPECIALIZADA
-        controlerEjemplar.crearEjemplar(new RevistaEspecializada(3L, "Todo sobre autos modernos", "Alain Prost", 1980));
+        controlerEjemplar.crearEjemplar(3L, "Todo sobre autos modernos", "Alain Prost", 1980, EnumCategoriaEjemplar.RevistaEspecializada);
 
         //      DIARIO
-        controlerEjemplar.crearEjemplar(new Diario(4L, "Clarin", "Leopoldo Alas", 2023));
+        controlerEjemplar.crearEjemplar(4L, "Clarin", "Leopoldo Alas", 2023, EnumCategoriaEjemplar.Diario);
 
         // BUSCAR EJEMPLARES SEGUN:
+            //ID
+        System.out.println();
+        System.out.println("Busqueda por ID:");
+        controlerEjemplar.buscarEjemplar(3L);
+
+            //TITULO
+        System.out.println();
+        System.out.println("Busqueda por TITULO:");
+        controlerEjemplar.buscarEjemplarXTitulo("Pricipito");
+
+            //AUTOR
+        System.out.println();
+        System.out.println("Busqueda por AUTOR:");
+        controlerEjemplar.buscarEjemplarXAutor("Inventado");
+
+            //ANIO PUBLICACION
+        System.out.println();
+        System.out.println("Busqueda por ANIO PUBLICACION:");
+        controlerEjemplar.buscarEjemplarXAnioPublicacion(2023);
+
+            //CATEGORIA
+        System.out.println();
+        System.out.println("Busqueda por CATEGORIA:");
+        controlerEjemplar.buscarEjemplaresXCategoria(EnumCategoriaEjemplar.Libro);
+
+        /*
+            //TITULO AUTOR
+        System.out.println();
+        System.out.println("Busqueda por TITULO y AUTOR:");
+        controlerEjemplar.buscarEjemplarXTituloAutor();
+
+            //TITULO ANIO
+        System.out.println();
+        System.out.println("Busqueda por TITULO y ANIO:");
+
+            //TITULO CATEGORIA
+        System.out.println();
+        System.out.println("Busqueda por TITULO y CATEGORIA:");
+
+            //AUTOR ANIO
+        System.out.println();
+        System.out.println("Busqueda por AUTOR y ANIO:");
+
+            //AUTOR CATEGORIA
+        System.out.println();
+        System.out.println("Busqueda por AUTOR y CATEGORIA:");
+
+            //ANIO CATEGORIA
+        System.out.println();
+        System.out.println("Busqueda por ANIO y CATEGORIA:");
+        */
+
 
         // CARGA DE PRESTAMOS
-        controlerPrestamo.crearPrestamo(new Prestamo(10L, LocalDate.now(), 10, null,  controlerSocios.buscarSocio(44749039), controlerEjemplar.buscarEjemplar(1L)));
+        //controlerPrestamo.crearPrestamo(new Prestamo(10L, LocalDate.now(), 10, null,  controlerSocios.buscarSocio(44749039), controlerEjemplar.buscarEjemplar(1L)));
 
         // ACTUALIZAR ESTADOS:
         // ABRIA QUE BUSCAR UN METODO EN EL CONTROLER QUE ACTUALIZE
@@ -63,7 +117,7 @@ public class Main {
 
         // VISUALIZAR HISTORIAL DE PRESTAMOS DE UN SOCIO
 
-        controlerSocios.verHistorialSocio(44749039);
+        //controlerSocios.verHistorialSocio(44749039);
         /*
         * SALTA ERROR:
         *

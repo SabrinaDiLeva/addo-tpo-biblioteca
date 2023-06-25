@@ -8,12 +8,21 @@ public abstract class Ejemplar {
     private String autor;
     private int anioPublicacion;
 
-    // Si creo q si, seria un atributo del la clase hijo
+    private EnumCategoriaEjemplar categoria;
 
 
     private boolean disponible;
     public Ejemplar(){
 
+    }
+
+    public Ejemplar(Long id, String titulo, String autor, int anioPublicacion, EnumCategoriaEjemplar categoria) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.anioPublicacion = anioPublicacion;
+        this.disponible = true;
+        this.categoria=categoria;
     }
 
     public Ejemplar(Long id, String titulo, String autor, int anioPublicacion) {
@@ -64,4 +73,13 @@ public abstract class Ejemplar {
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
+
+    public EnumCategoriaEjemplar getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(EnumCategoriaEjemplar categoria) {
+        this.categoria = categoria;
+    }
+
 }

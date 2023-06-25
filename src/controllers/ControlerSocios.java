@@ -17,8 +17,10 @@ public class ControlerSocios {
         return instancia;
     }
     //CRUD SOCIOS
-    public void crearSocio(Socio socio){;
+    public void crearSocio(int dni, String nombre, String apellido, String email, int telefono, EnumMedioDeComunicacion medioDeComunicacion){;
+        Socio socio = new Socio(dni, nombre, apellido,email,telefono,medioDeComunicacion);
         listaSocios.add(socio);
+        System.out.println("Se agrego correctamente al socio '"+nombre+"'. Ahora hay "+listaSocios.size()+" socios en total.");
     }
     public void borrarSocio(int dni){
         Socio aux = buscarSocio(dni);
