@@ -3,11 +3,12 @@ package controllers;
 import model.Notificacion;
 import model.Prestamo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControlerPrestamo {
     private static ControlerPrestamo instancia;
-    private List<Prestamo> listaPrestamos;
+    private List<Prestamo> listaPrestamos = new ArrayList<Prestamo>();
 
     private ControlerPrestamo(){}
 

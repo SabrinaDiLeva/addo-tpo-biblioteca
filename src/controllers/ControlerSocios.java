@@ -2,11 +2,12 @@ package controllers;
 
 import model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControlerSocios {
     private static ControlerSocios instancia;
-    private List<Socio> listaSocios;
+    private List<Socio> listaSocios =  new ArrayList<Socio>();
 
     private ControlerSocios(){ }
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ControlerEjemplar {
     private static ControlerEjemplar instancia;
-    private List<Ejemplar> listaEjemplares;
+    private List<Ejemplar> listaEjemplares = new ArrayList<Ejemplar>();
 
     private ControlerEjemplar(){}
 

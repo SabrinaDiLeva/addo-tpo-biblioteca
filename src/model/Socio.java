@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Socio {
@@ -12,7 +13,7 @@ public class Socio {
 
     private Conducta conducta;
 
-    private List<Prestamo> prestamos;
+    private List<Prestamo> prestamos = new ArrayList<Prestamo>();
 
     public Socio(int dni, String nombre, String apellido, String email, int telefono, EnumMedioDeComunicacion medioDeComunicacion) {
         this.dni = dni;
@@ -86,4 +87,5 @@ public class Socio {
     public void setPrestamos(List<Prestamo> prestamos) {
         this.prestamos = prestamos;
     }
+
 }

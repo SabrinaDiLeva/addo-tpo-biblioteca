@@ -16,7 +16,7 @@ public class AdaptadorTwilio implements IAdaptadorWhatsApp, IAdaptadorSMS {
     public void enviarSMS(Notificacion notificacion) {
         Message
                 .creator(
-                        new PhoneNumber(Integer.toString(notificacion.getPrestamo().getSocio().getTelefono())),    // TODO ver lo del destinatario
+                        new PhoneNumber(Integer.toString(notificacion.getPrestamo().getSocio().getTelefono())),
                         new PhoneNumber("+15017250604"),
                         notificacion.getMensajePredefinido()
                 )
