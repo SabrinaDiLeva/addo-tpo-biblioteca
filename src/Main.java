@@ -165,14 +165,52 @@ public class Main {
         System.out.println();
         System.out.println("Cargamos mas prestamos para mejorar la conducta del usuario");
         controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 2L);
-        //controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 4L);
-        //controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 5L);
-        //controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 6L);
+        controlerPrestamo.cerrado(3L);
+        controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 6L);
+        controlerPrestamo.cerrado(4L);
+        controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 4L);
+        controlerPrestamo.cerrado(5L);
+        controlerPrestamo.crearPrestamo(LocalDate.now(),44749039, 5L);
+        controlerPrestamo.cerrado(6L);
 
+        System.out.println();
+        System.out.println("-----------------------------------------");
+        System.out.println();
+        System.out.println("El proximo prestamo deberia tener un DIA EXTRA:");
+        controlerPrestamo.crearPrestamo(LocalDate.now(),44749039, 1L);
+        controlerPrestamo.cerrado(7L);
 
+        //si hacemos un prestamo mas, no deberia tener bonificacion
+        System.out.println();
+        System.out.println("-----------------------------------------");
+        System.out.println();
+        System.out.println("Este prestamo NO deberia volver a aplicar la bonificacion:");
+        controlerPrestamo.crearPrestamo(LocalDate.now(),44749039, 6L);
+        controlerPrestamo.proximoAVencer(8L);
+        controlerPrestamo.vencido(8L);
+        controlerPrestamo.cerradoFueraDeFecha(8L,7);
+
+        //validar que pasa si diasAtrasados>duracion
+        System.out.println();
+        System.out.println("-----------------------------------------");
+        System.out.println();
+        System.out.println("En este caso, el usuario tiene 7 dias de demora pero la duracion default del prestamo es de 5 dias.");
+        System.out.println("Vamos a dejarle 1 dia al prestamo como minimo. Los dias atrasados que no tengan efecto aca se descontaran en el proximo prestamo.");
+        controlerPrestamo.crearPrestamo(LocalDate.now(),44749039, 2L);
+        controlerPrestamo.cerrado(9L);
+
+        //contro
+        System.out.println();
+        System.out.println("-----------------------------------------");
+        System.out.println();
+        System.out.println("Se descuentan los dias atrasados pendientes del prestamo anterior.");
+        controlerPrestamo.crearPrestamo(LocalDate.now(),44749039, 5L);
+        controlerPrestamo.cerrado(10L);
 
         // ACTAULIZAR PARAMETROS DE PRESTAMOS (DIAS)
         // ABRIA UN METODO EN EL CONTROLER DE PRESTAMOS QUE CAMBIE SOLO LA DURACION
+
+         //controlerPrestamo.cambiarDias()
 
         // NOTIFICAR SOBRE SITUACIONES PARTICULAES
         // YYY ESTO VA DE LA MANO DE LOS ESTADOS
@@ -180,13 +218,6 @@ public class Main {
 
         // VISUALIZAR HISTORIAL DE PRESTAMOS DE UN SOCIO
 
-        //controlerSocios.verHistorialSocio(44749039);
-        /*
-        * SALTA ERROR:
-        *
-        * A LO MEJOR NOS COMBIENE BUSCAR EN LA LISTA DE PRESTAMOS SOBRE UN SOCIO EN ESPECIFICO
-        * PARA NO TENER QUE AGREGAR LOS PRESTAMOS EN EL SOCIO
-        *
-        * */
+        // controlerSocios.verHistorialSocio(44749039);
     }
 }

@@ -16,6 +16,7 @@ public class ControlerPrestamo {
     ControlerSocios controlerSocios = ControlerSocios.getInstancia();
     ControlerEjemplar controlerEjemplar = ControlerEjemplar.getInstacia();
 
+
     private ControlerPrestamo(){}
 
     public static ControlerPrestamo getInstancia(){
@@ -35,6 +36,12 @@ public class ControlerPrestamo {
             Prestamo prestamo= new Prestamo(id, fechaInicio,duracion,null,socio,ejemplar);
             prestamo.setEstado(new EnCurso(prestamo));
             listaPrestamos.add(prestamo);
+
+            //lo agregamos a la lista de prestamos del socio
+            socio.getPrestamos().add(prestamo);
+            List<Socio> socios = controlerSocios.listarSocios();
+            controlerSocios.actualizarSocio(socio);
+
             System.out.println("El prestamo '"+id+"' fue creado con exito. Se encuentra '"+prestamo.getEstado().getClass().getSimpleName()+"' y tendra una duracion de "+prestamo.getDuracion()+" dias.");
         }else{
             System.out.println("El socio "+socio.getDni()+" no puede solicitar un prestamo porque esta suspendido actualmente, debe regularizar su situacion con el bibliotecario.");
@@ -61,8 +68,30 @@ public class ControlerPrestamo {
         }else{
             duracion=5;
         }
-        duracion = duracion - socio.getConducta().getDiasAtradados();
-        duracion = duracion + (int)Math.floor(socio.getConducta().getPrestamosPuntuales()/5);
+        int diasAtrasados=socio.getConducta().getDiasAtradados();
+        Conducta conducta = socio.getConducta();
+        if(diasAtrasados> duracion){
+            int nuevaDuracion= (diasAtrasados-duracion)+1;
+            conducta.setDiasAtradados(nuevaDuracion);
+            socio.setConducta(conducta);
+            controlerSocios.actualizarSocio(socio);
+            System.out.println(controlerSocios.buscarSocio(socio.getDni()).getConducta().getDiasAtradados());
+            duracion=1;
+
+        }else{
+            duracion = duracion - diasAtrasados;
+            conducta.setDiasAtradados(0);
+            socio.setConducta(conducta);
+            controlerSocios.actualizarSocio(socio);
+        }
+
+        if(socio.getConducta().getPrestamosPuntuales()>=5){
+            duracion = duracion + (int)Math.floor(socio.getConducta().getPrestamosPuntuales()/5);
+            conducta.setPrestamosPuntuales(0);
+            socio.setConducta(conducta);
+            controlerSocios.actualizarSocio(socio);
+        }
+
         return duracion;
     }
     public void borrarPrestamo(Long id){
@@ -119,12 +148,21 @@ public class ControlerPrestamo {
         prestamo.setEstado(estado);
     }
 
-    public void cerradoFueraDeFecha(Long id, int dias){
+    public void cerradoFueraDeFecha(Long id, int dias) {
         Prestamo prestamo = buscarPrestamo(id);
         prestamo.getEstado().cerrado(dias);
         EstadoPrestamo estado = new Vencido(prestamo);
         prestamo.setEstado(estado);
     }
 
-
+    public void cambiarDias(Long id, int dias){
+        Prestamo prestamo = buscarPrestamo(id);
+        if (prestamo.getEstado() instanceof EnCurso || prestamo.getEstado() instanceof  ProximoAVencer) {
+            prestamo.setDuracion(dias);
+            System.out.println("Se cambio la cantidad de dias a: " + dias);
+        }
+        else{
+            System.out.println("No se puede cambiar la cantidad de dias porque el prestamo ya esta cerrado/vencido");
+        }
+    }
 }

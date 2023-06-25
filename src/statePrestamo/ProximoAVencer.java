@@ -44,7 +44,7 @@ public class ProximoAVencer extends EstadoPrestamo{
 
         if(prestamosATiempo>=5){
             System.out.println("El socio "+ prestamo.getSocio().getDni()+" ha devuelto "+prestamosATiempo + " prestamos a tiempo.");
-            System.out.println("Recibira una bonificación de " +(int)Math.floor(prestamosATiempo/5)+" dias en su proximo prestamo.");
+            System.out.println("Recibira una bonificacion de " +(int)Math.floor(prestamosATiempo/5)+" dias en su proximo prestamo.");
         }
 
     }

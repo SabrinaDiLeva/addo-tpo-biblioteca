@@ -1,6 +1,9 @@
 package statePrestamo;
 
+import controllers.ControlerSocios;
+import model.Conducta;
 import model.Prestamo;
+import model.Socio;
 import observer.Observer;
 
 import java.util.ArrayList;
@@ -13,7 +16,7 @@ public class EnCurso extends EstadoPrestamo {
         super(prestamo);
         observers= new ArrayList<>();
     }
-
+    ControlerSocios controlerSocios = ControlerSocios.getInstancia();
     @Override
     public void proxAvencer() { // aca estaria asociado el observer
         EstadoPrestamo estado = new ProximoAVencer(prestamo);
@@ -37,10 +40,11 @@ public class EnCurso extends EstadoPrestamo {
         //impacto positivo en la conducta del socio
         int prestamosATiempo= prestamo.getSocio().getConducta().getPrestamosPuntuales();
         prestamo.getSocio().getConducta().setPrestamosPuntuales(prestamosATiempo+1);
+        prestamosATiempo=prestamosATiempo+1;
 
-        if(prestamo.getSocio().getConducta().getPrestamosPuntuales()>=5){
+        if(prestamosATiempo>=5){
             System.out.println("El socio "+ prestamo.getSocio().getDni()+" ha devuelto "+prestamosATiempo + " prestamos a tiempo.");
-            System.out.println("Recibira una bonificación de " +(int)Math.floor(prestamosATiempo/5)+" dias en su proximo prestamo.");
+            System.out.println("Recibira una bonificacion de " + (int)Math.floor(prestamosATiempo/5) +" dias en su proximo prestamo.");
         }
     }
 
