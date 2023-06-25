@@ -1,6 +1,7 @@
 import controllers.ControlerEjemplar;
 import controllers.ControlerPrestamo;
 import controllers.ControlerSocios;
+import jdk.swing.interop.SwingInterOpUtils;
 import model.*;
 import statePrestamo.EnCurso;
 import statePrestamo.EstadoPrestamo;
@@ -48,6 +49,13 @@ public class Main {
 
         //      DIARIO
         controlerEjemplar.crearEjemplar("Clarin", "Leopoldo Alas", 2023, EnumCategoriaEjemplar.Diario);
+
+        //      OTRO LIBRO
+        controlerEjemplar.crearEjemplar("Don Quijote","Miguel de Cervantes",1605,EnumCategoriaEjemplar.Libro);
+
+        //      OTRA REVISTA
+        controlerEjemplar.crearEjemplar("Caras","Jorge Fontevecchia",1992,EnumCategoriaEjemplar.Revista);
+
 
         System.out.println();
         System.out.println("-----------------------------------------");
@@ -152,7 +160,16 @@ public class Main {
         System.out.println("Actualizamos estado de ProximoAVencer a Cerrado:");
         controlerPrestamo.cerrado(2L);
 
-        //hay que hacer que la devolucion impacte en la conducta del socio
+        System.out.println();
+        System.out.println("-----------------------------------------");
+        System.out.println();
+        System.out.println("Cargamos mas prestamos para mejorar la conducta del usuario");
+        controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 2L);
+        //controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 4L);
+        //controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 5L);
+        //controlerPrestamo.crearPrestamo(LocalDate.now(), 44749039, 6L);
+
+
 
         // ACTAULIZAR PARAMETROS DE PRESTAMOS (DIAS)
         // ABRIA UN METODO EN EL CONTROLER DE PRESTAMOS QUE CAMBIE SOLO LA DURACION
