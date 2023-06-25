@@ -4,34 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Conducta {
-    private Long id;
-    private int prestamosAtradados;
+    //private Long id;
+    private int diasAtradados;
     private int prestamosPuntuales;
 
     private List<Suspension> suspensiones;
 
 
-    public Conducta(Long id, int prestamosAtradados, int prestamosPuntuales) {
-        this.id = id;
-        this.prestamosAtradados = prestamosAtradados;
+    public Conducta(int diasAtradados, int prestamosPuntuales) {
+        this.diasAtradados = diasAtradados;
         this.prestamosPuntuales = prestamosPuntuales;
         this.suspensiones=new ArrayList<>();
     }
 
-    public Long getId() {
+    /*public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }*/
+
+    public int getDiasAtradados() {
+        return diasAtradados;
     }
 
-    public int getPrestamosAtradados() {
-        return prestamosAtradados;
-    }
-
-    public void setPrestamosAtradados(int prestamosAtradados) {
-        this.prestamosAtradados = prestamosAtradados;
+    public void setDiasAtradados(int diasAtradados) {
+        this.diasAtradados = diasAtradados;
     }
 
     public int getPrestamosPuntuales() {

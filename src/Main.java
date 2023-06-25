@@ -48,11 +48,6 @@ public class Main {
         controlerEjemplar.crearEjemplar(4L, "Clarin", "Leopoldo Alas", 2023, EnumCategoriaEjemplar.Diario);
 
         // BUSCAR EJEMPLARES SEGUN:
-            //ID
-        System.out.println();
-        System.out.println("Busqueda por ID:");
-        controlerEjemplar.buscarEjemplar(3L);
-
             //TITULO
         System.out.println();
         System.out.println("Busqueda por TITULO:");
@@ -102,7 +97,9 @@ public class Main {
 
 
         // CARGA DE PRESTAMOS
-        //controlerPrestamo.crearPrestamo(new Prestamo(10L, LocalDate.now(), 10, null,  controlerSocios.buscarSocio(44749039), controlerEjemplar.buscarEjemplar(1L)));
+        System.out.println();
+        System.out.println("Carga de PRESTAMO");
+        controlerPrestamo.crearPrestamo(1L, LocalDate.now(), 44749039, 1L);
 
         // ACTUALIZAR ESTADOS:
         // ABRIA QUE BUSCAR UN METODO EN EL CONTROLER QUE ACTUALIZE

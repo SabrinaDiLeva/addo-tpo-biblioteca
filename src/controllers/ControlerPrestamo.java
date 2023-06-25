@@ -1,14 +1,21 @@
 package controllers;
 
-import model.Notificacion;
-import model.Prestamo;
+import model.*;
+import statePrestamo.EnCurso;
+import statePrestamo.EstadoPrestamo;
+import controllers.ControlerSocios;
+import controllers.ControlerEjemplar;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ControlerPrestamo {
     private static ControlerPrestamo instancia;
     private List<Prestamo> listaPrestamos = new ArrayList<Prestamo>();
+
+    ControlerSocios controlerSocios = ControlerSocios.getInstancia();
+    ControlerEjemplar controlerEjemplar = ControlerEjemplar.getInstacia();
 
     private ControlerPrestamo(){}
 
@@ -18,8 +25,25 @@ public class ControlerPrestamo {
         return instancia;
     }
 
-    public void crearPrestamo(Prestamo prestamo){
+    public void crearPrestamo(Long id, LocalDate fechaInicio, int dniSocio, Long idEjemplar){
+        Socio socio= controlerSocios.buscarSocio(dniSocio);
+        Ejemplar ejemplar = controlerEjemplar.buscarEjemplar(idEjemplar);
+        int duracion = calcularDuracionPrestamo(socio,ejemplar);
+        Prestamo prestamo= new Prestamo(id, fechaInicio,duracion,null,socio,ejemplar);
+        prestamo.setEstado(new EnCurso(prestamo));
         listaPrestamos.add(prestamo);
+        System.out.println("El prestamo '"+id+"' se encuentra '"+prestamo.getEstado().getClass().getSimpleName()+"' y tendra una duracion de "+prestamo.getDuracion()+" dias.");
+    }
+    public int calcularDuracionPrestamo(Socio socio, Ejemplar ejemplar){
+        int duracion=0;
+        if(ejemplar.getClass().getSimpleName().equals(EnumCategoriaEjemplar.Libro)){
+            duracion=10;
+        }else{
+            duracion=5;
+        }
+        duracion = duracion - socio.getConducta().getDiasAtradados();
+        duracion = duracion + (int)Math.floor(socio.getConducta().getPrestamosPuntuales()/5);
+        return duracion;
     }
     public void borrarPrestamo(Long id){
         Prestamo prestamo = buscarPrestamo(id);

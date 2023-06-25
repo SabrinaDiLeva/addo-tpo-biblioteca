@@ -13,7 +13,7 @@ public class Socio {
 
     private Conducta conducta;
 
-    private List<Prestamo> prestamos = new ArrayList<Prestamo>();
+    private List<Prestamo> prestamos;
 
     public Socio(int dni, String nombre, String apellido, String email, int telefono, EnumMedioDeComunicacion medioDeComunicacion) {
         this.dni = dni;
@@ -22,6 +22,8 @@ public class Socio {
         this.email = email;
         this.telefono = telefono;
         this.medioDeComunicacion = medioDeComunicacion;
+        this.conducta=new Conducta(0,0);
+        this.prestamos=new ArrayList<>();
     }
 
     public int getDni() {

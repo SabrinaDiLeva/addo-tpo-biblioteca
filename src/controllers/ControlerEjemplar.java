@@ -48,14 +48,14 @@ public class ControlerEjemplar {
         return -1;
     }
     public Ejemplar buscarEjemplar(Long id){
-        System.out.println("Ejemplar con el ID '"+ id+"':");
+        //System.out.println("Ejemplar con el ID '"+ id+"':");
         for(Ejemplar ejemplar: listaEjemplares){
             if(ejemplar.getId() == id){
-                System.out.println("ID: "+ ejemplar.getId() +", Titulo: "+ejemplar.getTitulo()+", Autor: "+ ejemplar.getAutor()+", AnioPublicacion: "+ejemplar.getAnioPublicacion()+".");
+                //System.out.println("ID: "+ ejemplar.getId() +", Titulo: "+ejemplar.getTitulo()+", Autor: "+ ejemplar.getAutor()+", AnioPublicacion: "+ejemplar.getAnioPublicacion()+".");
                 return ejemplar;
             }
         }
-        System.out.println("No se encontro ningun ejemplar con el id '"+ id+"'.");
+        //System.out.println("No se encontro ningun ejemplar con el id '"+ id+"'.");
         return null;
     }
 
