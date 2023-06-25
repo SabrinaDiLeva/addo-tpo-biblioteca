@@ -3,6 +3,7 @@ package statePrestamo;
 import model.Prestamo;
 import observer.Observer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EnCurso extends EstadoPrestamo {
@@ -10,6 +11,7 @@ public class EnCurso extends EstadoPrestamo {
     private List<Observer> observers;
     public EnCurso(Prestamo prestamo){
         super(prestamo);
+        observers= new ArrayList<>();
     }
 
     @Override
@@ -30,7 +32,7 @@ public class EnCurso extends EstadoPrestamo {
         EstadoPrestamo estado = new Cerrado(prestamo);
         prestamo.setEstado(estado);
         notificar(this,estado);
-        System.out.println("El prestamo fue devuelto");
+        System.out.println("El prestamo fue devuelto a tiempo");
     }
 
     @Override

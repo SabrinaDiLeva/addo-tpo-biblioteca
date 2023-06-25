@@ -3,12 +3,14 @@ package statePrestamo;
 import model.Prestamo;
 import observer.Observer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cerrado extends EstadoPrestamo{
     private List<Observer> observers;
     public Cerrado(Prestamo prestamo){
         super(prestamo);
+        observers= new ArrayList<>();
     }
     @Override
     public void proxAvencer() {

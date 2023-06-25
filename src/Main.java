@@ -32,6 +32,8 @@ public class Main {
         System.out.println("Carga de SOCIO:");
         controlerSocios.crearSocio(44749039, "Juan", "Canestrari", "juanchicanestra@gmail.com", 1140646891, EnumMedioDeComunicacion.email);
 
+        System.out.println();
+        System.out.println("-----------------------------------------");
         // CARGAR EJEMPLARES
         System.out.println();
         System.out.println("Carga de EJEMPLAR:");
@@ -46,6 +48,9 @@ public class Main {
 
         //      DIARIO
         controlerEjemplar.crearEjemplar(4L, "Clarin", "Leopoldo Alas", 2023, EnumCategoriaEjemplar.Diario);
+
+        System.out.println();
+        System.out.println("-----------------------------------------");
 
         // BUSCAR EJEMPLARES SEGUN:
             //TITULO
@@ -95,6 +100,8 @@ public class Main {
         System.out.println("Busqueda por ANIO y CATEGORIA:");
         */
 
+        System.out.println();
+        System.out.println("-----------------------------------------");
 
         // CARGA DE PRESTAMOS
         System.out.println();
@@ -102,8 +109,33 @@ public class Main {
         controlerPrestamo.crearPrestamo(1L, LocalDate.now(), 44749039, 1L);
 
         // ACTUALIZAR ESTADOS:
-        // ABRIA QUE BUSCAR UN METODO EN EL CONTROLER QUE ACTUALIZE
+        System.out.println();
+        System.out.println("Actualizamos estado de EnCurso a ProximoAVencer:");
+        controlerPrestamo.proximoAVencer(1L);
 
+        System.out.println();
+        System.out.println("Actualizamos estado de ProximoAVencer a Vencido:");
+        controlerPrestamo.vencido(1L);
+
+        System.out.println();
+        System.out.println("Actualizamos estado de Vencido a Cerrado:");
+        controlerPrestamo.cerrado(1L);
+
+        System.out.println();
+        System.out.println("-----------------------------------------");
+        //Cargamos otro prestamo
+        System.out.println();
+        System.out.println("Carga de PRESTAMO");
+        controlerPrestamo.crearPrestamo(2L, LocalDate.now(), 44749039, 3L);
+
+        // ACTUALIZAR ESTADOS:
+        System.out.println();
+        System.out.println("Actualizamos estado de EnCurso a ProximoAVencer:");
+        controlerPrestamo.proximoAVencer(2L);
+
+        System.out.println();
+        System.out.println("Actualizamos estado de ProximoAVencer a Cerrado:");
+        controlerPrestamo.cerrado(2L);
 
         // ACTAULIZAR PARAMETROS DE PRESTAMOS (DIAS)
         // ABRIA UN METODO EN EL CONTROLER DE PRESTAMOS QUE CAMBIE SOLO LA DURACION

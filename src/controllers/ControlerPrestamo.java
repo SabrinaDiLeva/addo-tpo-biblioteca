@@ -5,6 +5,8 @@ import statePrestamo.EnCurso;
 import statePrestamo.EstadoPrestamo;
 import controllers.ControlerSocios;
 import controllers.ControlerEjemplar;
+import statePrestamo.ProximoAVencer;
+import statePrestamo.Vencido;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ public class ControlerPrestamo {
     }
     public int calcularDuracionPrestamo(Socio socio, Ejemplar ejemplar){
         int duracion=0;
-        if(ejemplar.getClass().getSimpleName().equals(EnumCategoriaEjemplar.Libro)){
+        if(ejemplar.getClass().getSimpleName().equals(EnumCategoriaEjemplar.Libro.name())){
             duracion=10;
         }else{
             duracion=5;
@@ -76,6 +78,27 @@ public class ControlerPrestamo {
 
         }
         return null;
+    }
+
+    public void proximoAVencer(Long id){
+        Prestamo prestamo = buscarPrestamo(id);
+        prestamo.getEstado().proxAvencer();
+        EstadoPrestamo estado = new ProximoAVencer(prestamo);
+        prestamo.setEstado(estado);
+    }
+
+    public void vencido(Long id){
+        Prestamo prestamo = buscarPrestamo(id);
+        prestamo.getEstado().vencido();
+        EstadoPrestamo estado = new Vencido(prestamo);
+        prestamo.setEstado(estado);
+    }
+
+    public void cerrado(Long id){
+        Prestamo prestamo = buscarPrestamo(id);
+        prestamo.getEstado().cerrado();
+        EstadoPrestamo estado = new Vencido(prestamo);
+        prestamo.setEstado(estado);
     }
 
 

@@ -3,6 +3,7 @@ package statePrestamo;
 import model.Prestamo;
 import observer.Observer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProximoAVencer extends EstadoPrestamo{
@@ -11,6 +12,7 @@ public class ProximoAVencer extends EstadoPrestamo{
 
     public ProximoAVencer(Prestamo prestamo){
         super(prestamo);
+        observers= new ArrayList<>();
     }
     @Override
     public void proxAvencer() {
@@ -19,17 +21,18 @@ public class ProximoAVencer extends EstadoPrestamo{
 
     @Override
     public void vencido() {
-
         EstadoPrestamo estado = new Vencido(prestamo);
         prestamo.setEstado(estado);
         notificar(this,estado);
-        System.out.println("El prestamo se venció");
+        System.out.println("El prestamo se vencio");
     }
 
     @Override
     public void cerrado() {
-        prestamo.setEstado(new Cerrado(prestamo));
-        System.out.println("El prestamo fue devuelto");
+        EstadoPrestamo estado = new Cerrado(prestamo);
+        prestamo.setEstado(estado);
+        notificar(this,estado);
+        System.out.println("El prestamo fue devuelto a tiempo");
     }
 
     @Override

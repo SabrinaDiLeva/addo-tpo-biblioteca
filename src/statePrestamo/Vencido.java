@@ -3,12 +3,14 @@ package statePrestamo;
 import model.Prestamo;
 import observer.Observer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Vencido extends EstadoPrestamo{
     private List<Observer> observers;
     public Vencido(Prestamo prestamo){
         super(prestamo);
+        observers= new ArrayList<>();
     }
 
     @Override
@@ -23,8 +25,10 @@ public class Vencido extends EstadoPrestamo{
 
     @Override
     public void cerrado() {
-        prestamo.setEstado(new Cerrado(prestamo));
-        System.out.println("El prestamo fue devuelto");
+        EstadoPrestamo estado = new Cerrado(prestamo);
+        prestamo.setEstado(estado);
+        notificar(this,estado);
+        System.out.println("El prestamo fue devuelto fuera de fecha");
     }
 
     @Override
