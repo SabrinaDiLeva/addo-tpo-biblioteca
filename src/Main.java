@@ -137,6 +137,8 @@ public class Main {
         System.out.println("Actualizamos estado de ProximoAVencer a Cerrado:");
         controlerPrestamo.cerrado(2L);
 
+        //hay que hacer que la devolucion impacte en la conducta del socio
+
         // ACTAULIZAR PARAMETROS DE PRESTAMOS (DIAS)
         // ABRIA UN METODO EN EL CONTROLER DE PRESTAMOS QUE CAMBIE SOLO LA DURACION
 
