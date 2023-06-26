@@ -31,22 +31,38 @@ public class ControlerPrestamo {
         //controlar que no este suspendido
         if(puedeSolicitarPrestamo(socio)){
             Ejemplar ejemplar = controlerEjemplar.buscarEjemplar(idEjemplar);
-            Long id = Long.valueOf(listaPrestamos.size()+1);
-            int duracion = calcularDuracionPrestamo(socio,ejemplar);
-            Prestamo prestamo= new Prestamo(id, fechaInicio,duracion,null,socio,ejemplar);
-            calcularFechaFin(prestamo);
-            prestamo.setEstado(new EnCurso(prestamo));
-            listaPrestamos.add(prestamo);
+            if(validarDisponibilidadEjemplar(ejemplar.getId())){
+                Long id = Long.valueOf(listaPrestamos.size()+1);
+                int duracion = calcularDuracionPrestamo(socio,ejemplar);
+                Prestamo prestamo= new Prestamo(id, fechaInicio,duracion,null,socio,ejemplar);
+                calcularFechaFin(prestamo);
+                prestamo.setEstado(new EnCurso(prestamo));
+                listaPrestamos.add(prestamo);
 
-            //lo agregamos a la lista de prestamos del socio
-            socio.getPrestamos().add(prestamo);
-            List<Socio> socios = controlerSocios.listarSocios();
-            controlerSocios.actualizarSocio(socio);
+                //lo agregamos a la lista de prestamos del socio
+                socio.getPrestamos().add(prestamo);
+                List<Socio> socios = controlerSocios.listarSocios();
+                controlerSocios.actualizarSocio(socio);
 
-            System.out.println("El prestamo '"+id+"' fue creado con exito. Se encuentra '"+prestamo.getEstado().getClass().getSimpleName()+"' y tendra una duracion de "+prestamo.getDuracion()+" dias.");
+                System.out.println("El prestamo '"+id+"' fue creado con exito. Se encuentra '"+prestamo.getEstado().getClass().getSimpleName()+"' y tendra una duracion de "+prestamo.getDuracion()+" dias.");
+
+            }else{
+                System.out.println("No se puede generar el prestamo porque el ejemplar '"+ejemplar.getId()+"' no esta disponible en este momento.");
+            }
         }else{
             System.out.println("El socio "+socio.getDni()+" no puede solicitar un prestamo porque esta suspendido actualmente, debe regularizar su situacion con el bibliotecario.");
         }
+    }
+    public boolean validarDisponibilidadEjemplar(Long id){
+        for(Prestamo prestamo : listaPrestamos){
+            String estado = prestamo.getEstado().getClass().getSimpleName();
+            if(estado.equals("EnCurso") ||estado.equals("ProximoAVencer")|| estado.equals("Vencido")){
+                if(prestamo.getEjemplar().getId()==id){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     public void calcularFechaFin(Prestamo prestamo){
         LocalDate fechaInicio= prestamo.getFechaInicio();

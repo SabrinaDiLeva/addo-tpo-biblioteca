@@ -221,5 +221,17 @@ public class Main {
         System.out.println("VER HISTORIAL DE UN SOCIO:");
         controlerSocios.verHistorialSocio(44749039);
 
+
+        System.out.println();
+        System.out.println("-----------------------------------------");
+        System.out.println();
+        System.out.println("Carga de SOCIO:");
+        controlerSocios.crearSocio(44123456, "Sabrina", "Di Leva", "sabrina@gmail.com", 1112345678, EnumMedioDeComunicacion.whatsapp);
+        System.out.println();
+        System.out.println("-----------------------------------------");
+        //Cargamos un prestamo fallido
+        System.out.println();
+        System.out.println("Carga de PRESTAMO");
+        controlerPrestamo.crearPrestamo(LocalDate.now(), 44123456, 5L);
     }
 }
